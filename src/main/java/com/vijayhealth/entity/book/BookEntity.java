@@ -12,6 +12,9 @@ public class BookEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @Column(name = "res_id")
+    private Long resid;
+
     @Column(name = "name", length = 100)
     private String name;
 
@@ -97,6 +100,9 @@ public class BookEntity {
         this.resDeleted = resDeleted;
     }
 
+    public Long getResid() {return resid;}
+
+    public void setResid(Long resid) {this.resid = resid;}
 
 
 }

@@ -14,10 +14,22 @@ public class SequenceInitializer implements InitializingBean {
     @Override
     public void afterPropertiesSet() throws Exception {
         createSequenceUserDetails();
+        createSequenceBook();
     }
 
     private void createSequenceUserDetails() {
         String sequenceName = "res_id_sequence_user_detail";
+        if (sequenceExists(sequenceName)) {
+            String sql = "CREATE SEQUENCE " + sequenceName + " START 1 INCREMENT 1";
+            jdbcTemplate.execute(sql);
+            System.out.println("SEQUENCE " + sequenceName + " create Sequence MilestoneMovementQuestionsCategory successfully.");
+        } else {
+            System.out.println("SEQUENCE " + sequenceName + " already exists. Skipping create Sequence MilestoneMovementQuestionsCategory creation.");
+        }
+    }
+
+    private void createSequenceBook() {
+        String sequenceName = "res_id_sequence_book_detail";
         if (sequenceExists(sequenceName)) {
             String sql = "CREATE SEQUENCE " + sequenceName + " START 1 INCREMENT 1";
             jdbcTemplate.execute(sql);

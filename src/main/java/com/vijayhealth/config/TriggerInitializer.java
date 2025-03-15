@@ -28,6 +28,7 @@ public class TriggerInitializer implements InitializingBean {
     @Override
     public void afterPropertiesSet() {
         createUserDetailTrigger();
+        createBookDetailTrigger();
     }
 
     private void createUserDetailTrigger() {
@@ -40,6 +41,22 @@ public class TriggerInitializer implements InitializingBean {
                 System.out.println("user_detail_trigger created successfully.");
             } else {
                 System.out.println("user_detail_trigger already exists.Skipping trigger creation.");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void createBookDetailTrigger() {
+        try {
+            Resource resource = resourceLoader.getResource(Constants.BOOK_DETAIL_TRIGGERS);
+            InputStream inputStream = resource.getInputStream();
+            String triggerSql = new String(inputStream.readAllBytes(), StandardCharsets.UTF_8);
+            if (isTriggerExists("book_detail_res_id_trigger")) {
+                jdbcTemplate.execute(triggerSql);
+                System.out.println("book_detail_trigger created successfully.");
+            } else {
+                System.out.println("book_detail_trigger already exists.Skipping trigger creation.");
             }
         } catch (IOException e) {
             e.printStackTrace();

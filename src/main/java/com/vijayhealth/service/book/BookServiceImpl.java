@@ -3,6 +3,8 @@ package com.vijayhealth.service.book;
 import com.vijayhealth.entity.book.BookEntity;
 import com.vijayhealth.repository.BookRepository;
 import com.vijayhealth.service.kafka.producer.KafkaProducerServiceImpl;
+import jakarta.persistence.EntityManager;
+import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,13 +20,16 @@ public class BookServiceImpl implements BookService{
 
     private final BookRepository bookRepository;
     private final KafkaProducerServiceImpl kafkaProducerService;
+    private final EntityManager entityManager;
 
-    public BookServiceImpl(BookRepository bookRepository, KafkaProducerServiceImpl kafkaProducerService) {
+    public BookServiceImpl(BookRepository bookRepository, KafkaProducerServiceImpl kafkaProducerService, EntityManager entityManager) {
         this.bookRepository = bookRepository;
         this.kafkaProducerService = kafkaProducerService;
+        this.entityManager = entityManager;
     }
 
     @Override
+    @Transactional
     public BookEntity createBook(BookEntity book) {
         logger.debug("Debugging some information...");
         LocalDateTime currentDateTime = LocalDateTime.now();
@@ -36,6 +41,7 @@ public class BookServiceImpl implements BookService{
         book.setResDeleted(false);
         BookEntity saveBook= bookRepository.save(book);
         kafkaProducerService.sendBookMessage(book);
+        entityManager.refresh(saveBook);
         return saveBook;
     }
 
