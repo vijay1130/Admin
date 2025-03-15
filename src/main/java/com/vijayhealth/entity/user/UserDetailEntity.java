@@ -8,10 +8,6 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "user_detail")
-@Getter
-@Setter
-@ToString
-@RequiredArgsConstructor
 public class UserDetailEntity {
 
     @Id
@@ -55,4 +51,100 @@ public class UserDetailEntity {
     @Column(name = "res_deleted")
     private Boolean resDeleted;
 
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public Long getResId() {
+        return resId;
+    }
+
+    public void setResId(Long resId) {
+        this.resId = resId;
+    }
+
+    public @NotBlank String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(@NotBlank String firstName) {
+        this.firstName = firstName;
+    }
+
+    public @NotBlank String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(@NotBlank String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getMediaPath() {
+        return mediaPath;
+    }
+
+    public void setMediaPath(String mediaPath) {
+        this.mediaPath = mediaPath;
+    }
+
+    public @NotBlank String getEmail() {
+        return email;
+    }
+
+    public void setEmail(@NotBlank String email) {
+        this.email = email;
+    }
+
+    public @NotBlank String getPassword() {
+        return password;
+    }
+
+    public void setPassword(@NotBlank String password) {
+        this.password = password;
+    }
+
+    public String getAccessToken() {
+        return accessToken;
+    }
+
+    public void setAccessToken(String accessToken) {
+        this.accessToken = accessToken;
+    }
+
+    public LocalDateTime getResPublishedAt() {
+        return resPublishedAt;
+    }
+
+    public void setResPublishedAt(LocalDateTime resPublishedAt) {
+        this.resPublishedAt = resPublishedAt;
+    }
+
+    public LocalDateTime getResUpdatedAt() {
+        return resUpdatedAt;
+    }
+
+    public void setResUpdatedAt(LocalDateTime resUpdatedAt) {
+        this.resUpdatedAt = resUpdatedAt;
+    }
+
+    public LocalDateTime getResDeletedAt() {
+        return resDeletedAt;
+    }
+
+    public void setResDeletedAt(LocalDateTime resDeletedAt) {
+        this.resDeletedAt = resDeletedAt;
+    }
+
+    public Boolean getResDeleted() {
+        return resDeleted;
+    }
+
+    public void setResDeleted(Boolean resDeleted) {
+        this.resDeleted = resDeleted;
+    }
 }
