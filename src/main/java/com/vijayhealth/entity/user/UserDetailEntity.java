@@ -147,4 +147,5 @@ public class UserDetailEntity {
     public void setResDeleted(Boolean resDeleted) {
         this.resDeleted = resDeleted;
     }
+
 }
